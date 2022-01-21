@@ -1,5 +1,6 @@
 package mz.co.ubisse.app.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,32 +16,30 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-public class Cliente {
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  private int codigo;
-	  
-	  @Column(name = "cliente_nome")
-	  private String nome;
-	  
-	  @Column(name = "cliente_dataCadastro")
-	  @DateTimeFormat(pattern = "yyyy-MM-dd")
-	  private LocalDateTime dataCadastro;
-	  
-	  @Column(name = "cliente_estado", length = 1)
-	  private int estado;
-	  
-	  @Column(name = "cliente_saldoCliente")
-	  private double saldoCliente;	
-	  
-	  @ManyToOne(fetch = FetchType.LAZY)
-	  @JoinColumn(name = "codigo_id")	
-	  private Pessoa pessoa;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-	 
-	  
+@Entity
+public class Cliente implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int codigo;
+
+	@Column(name = "data_cadastro")
+	private LocalDateTime dataCadastro;
+
+	@Column(name = "cliente_estado", length = 1)
+	private boolean estado;
+
+	@Column(name = "saldo_cliente")
+	private double saldoCliente;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "codigo_id")
+	private Pessoa pessoa;
+
 	public int getCodigo() {
 		return codigo;
 	}
@@ -57,11 +56,11 @@ public class Cliente {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public int getEstado() {
+	public boolean isEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
@@ -97,7 +96,5 @@ public class Cliente {
 		Cliente other = (Cliente) obj;
 		return codigo == other.codigo;
 	}
-	  
-	  
 
 }

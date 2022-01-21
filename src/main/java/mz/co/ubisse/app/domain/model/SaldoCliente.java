@@ -1,5 +1,6 @@
 package mz.co.ubisse.app.domain.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -12,24 +13,23 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class SaldoCliente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
-	
+
 	@Column(name = "estado", length = 1)
-	private int estado;
-	
-	@Column(name = "valor_credito", length = (int) 15.2)
-	private double valorCredito;
-	
-	@Column(name = "valor_debito", length = (int) 15.2)
-	private double valorDebito;
-	
-	@Column(name = "valor_total", length = (int) 15.2)
-	private double valorTotal;
-	
-	
+	private boolean estado;
+
+	@Column(name = "valor_credito" )
+	private BigDecimal valorCredito;
+
+	@Column(name = "valor_debito")
+	private BigDecimal valorDebito;
+
+	@Column(name = "valor_total")
+	private BigDecimal valorTotal;
+
 	@OneToOne(fetch = FetchType.EAGER)
 	private Cliente cliente;
 
@@ -41,35 +41,35 @@ public class SaldoCliente {
 		this.codigo = codigo;
 	}
 
-	public int getEstado() {
+	public boolean isEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
-	public double getValorCredito() {
+	public BigDecimal getValorCredito() {
 		return valorCredito;
 	}
 
-	public void setValorCredito(double valorCredito) {
+	public void setValorCredito(BigDecimal valorCredito) {
 		this.valorCredito = valorCredito;
 	}
 
-	public double getValorDebito() {
+	public BigDecimal getValorDebito() {
 		return valorDebito;
 	}
 
-	public void setValorDebito(double valorDebito) {
+	public void setValorDebito(BigDecimal valorDebito) {
 		this.valorDebito = valorDebito;
 	}
 
-	public double getValorTotal() {
+	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(double valorTotal) {
+	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 
@@ -97,7 +97,5 @@ public class SaldoCliente {
 		SaldoCliente other = (SaldoCliente) obj;
 		return codigo == other.codigo;
 	}
-	
-	
 
 }

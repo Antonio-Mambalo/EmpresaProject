@@ -1,5 +1,6 @@
 package mz.co.ubisse.app.domain.model;
 
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,24 +12,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Fornecedor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
-	
+
 	@Column(name = "data_cadastro")
-	private boolean dataCadastro;
-	
+	private LocalDateTime dataCadastro;
+
 	@Column(name = "estado")
-	private String estado;
-	
-	@ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.PERSIST )
+	private boolean estado;
+
+	@ManyToOne
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
-	
 	public long getCodigo() {
 		return codigo;
 	}
@@ -37,19 +39,19 @@ public class Fornecedor {
 		this.codigo = codigo;
 	}
 
-	public boolean isDataCadastro() {
+	public LocalDateTime getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(boolean dataCadastro) {
+	public void setDataCadastro(LocalDateTime dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public String getEstado() {
+	public boolean isEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
@@ -60,6 +62,5 @@ public class Fornecedor {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
-	
+
 }

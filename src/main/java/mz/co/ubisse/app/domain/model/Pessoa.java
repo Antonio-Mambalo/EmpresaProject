@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
 @Entity
 public class Pessoa {
 	
@@ -76,6 +79,24 @@ public class Pessoa {
 	
 	@Column(name = "telefone", length = 15)
 	private String telefone;
+	
+	
+
+	public List<Cliente> getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(List<Cliente> cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<Fornecedor> getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(List<Fornecedor> fornecedor) {
+		this.fornecedor = fornecedor;
+	}
 
 	public long getCodigo() {
 		return codigo;
